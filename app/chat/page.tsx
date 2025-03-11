@@ -101,14 +101,16 @@ const ChatInterface: React.FC = () => {
                         <textarea
                             ref={textareaRef}
                             placeholder="Send a message..."
-                            className="w-full bg-transparent border-none focus:ring-0 outline-none resize-none p-1 pr-1 text-gray-700 min-h-[40px] max-h-[30vh] overflow-y-auto text-sm md:text-base dark:text-white"
+                            className="flex w-full border border-input px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-2xl !text-base bg-muted pb-10 dark:border-zinc-700"
                             rows={1}
                             value={message}
                             onChange={handleInputChange}
                             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), sendMessage())}
                         />
                         <div className="flex justify-between p-2 pt-3">
-                            <MicIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 cursor-pointer hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
+                            <div className="flex items-center justify-center mt-2">
+                                <MicIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 cursor-pointer hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
+                            </div>
                             <div className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-200 cursor-pointer hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all" onClick={sendMessage}>
                                 {message.trim() === "" ? <AudioLinesIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" /> : <ArrowUpIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />}
                             </div>
