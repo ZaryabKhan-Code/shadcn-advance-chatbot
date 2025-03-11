@@ -70,10 +70,15 @@ const ChatInterface: React.FC = () => {
             <div className="flex flex-col min-w-0 h-dvh bg-background">
                 <Header />
 
-                <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll">
+                <div className="flex flex-col min-w-0 gap-5 flex-1 overflow-y-scroll">
                     {messages.map((msg, index) => (
-                        <div key={index} className="w-full mx-auto max-w-3xl px-3 group/message">
-                            <div className={`break-words w-fit max-w-[80%] md:max-w-[70%] lg:max-w-[65%] p-2 md:p-3 text-sm md:text-[16px] ${msg.sender === "user" ? "bg-blue-500 text-white self-end rounded-lg ml-auto" : "text-gray-800 self-start bg-gray-100 rounded-lg mt-2 md:mt-3"}`}>
+                        <div key={index} className="w-full mx-auto max-w-3xl px-5 group/message">
+                            <div className={`break-words w-fit max-w-[80%] md:max-w-[70%] lg:max-w-[65%] p-2  md:p-3 text-sm md:text-[16px] 
+                            ${msg.sender === "user"
+                                    ? "bg-blue-500 text-white self-end rounded-lg ml-auto"
+                                    : "text-gray-800  self-start bg-gray-100 dark:bg-gray-800 dark:text-white rounded-lg mt-2 md:mt-3"
+                                }`}
+                            >
                                 {msg.isLoading ? (
                                     <div className="flex items-center space-x-1 md:space-x-2">
                                         <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce"></div>
@@ -84,8 +89,12 @@ const ChatInterface: React.FC = () => {
                                     msg.text
                                 )}
                             </div>
+
+                            {/* Interaction buttons always visible for last bot message, otherwise only on hover */}
                             {msg.sender === "bot" && !msg.isLoading && (
-                                <div className={`flex mt-2 pl-[6px] pt-[2px] space-x-2 text-gray-500 transition-opacity duration-300 ${msg.isLast ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+                                <div className={`flex mt-2 pl-[6px] pt-[2px] space-x-2 text-gray-500 transition-opacity duration-300 
+                ${msg.isLast ? "opacity-100" : "opacity-0 group-hover/message:opacity-100"}`}
+                                >
                                     <Copy className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                     <ThumbsUp className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                     <ThumbsDown className="w-4 h-4 cursor-pointer hover:text-gray-700" />
@@ -93,6 +102,7 @@ const ChatInterface: React.FC = () => {
                             )}
                         </div>
                     ))}
+
                     <div ref={messagesEndRef} />
                 </div>
 

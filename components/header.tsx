@@ -1,11 +1,12 @@
-'use client'
-import { SidebarTrigger } from './ui/sidebar'
-import { PlusIcon } from 'lucide-react'
-import * as React from "react"
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
-import { ChevronDownIcon } from "lucide-react";
+"use client";
 
-import { Button } from "@/components/ui/button"
+import * as React from "react";
+import { SidebarTrigger, useSidebar, SidebarProvider, Sidebar } from "./ui/sidebar";
+import { PlusIcon, ChevronDownIcon, Share2Icon, SunIcon, MoonIcon } from "lucide-react";
+import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
+import { useTheme } from "next-themes"; // For theme toggling
+
+import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -13,64 +14,97 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 
-type Checked = DropdownMenuCheckboxItemProps["checked"]
+type Checked = DropdownMenuCheckboxItemProps["checked"];
 
 const Header = () => {
-    const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
-    const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
-    const [showPanel, setShowPanel] = React.useState<Checked>(false)
+    const { open } = useSidebar(); // Get sidebar open state
+    const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
+    const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false);
+    const [showPanel, setShowPanel] = React.useState<Checked>(false);
+    const { theme, setTheme } = useTheme(); // Theme toggle functionality
 
     return (
         <>
-            <header className="flex sticky top-0 bg-background py-1.5 items-center px-2 md:px-2 gap-2">
-                <div className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm">
-                    <SidebarTrigger className="ml-[1.1]" />
-                </div>
-                <div className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm">
-                    <PlusIcon />
-                </div>
-                <div className="font-[family-name:var(--font-geist-sans)]">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline" className="w-[140px] flex items-center justify-between px-3 font-[family-name:var(--font-geist-sans)]">
-                                Appearance
-                                <ChevronDownIcon className="w-4 h-4 ml-1" />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent
-                            align="start"
-                            className="font-[family-name:var(--font-geist-sans)]"
-                        >
-                            <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuCheckboxItem
-                                checked={showStatusBar}
-                                onCheckedChange={setShowStatusBar}
+            <header className="flex sticky top-0 bg-background py-1.5 items-center px-2 md:px-2 gap-2 justify-between">
+                {/* Left Side: Share Button and Theme Toggle */}
+
+                {/* Center: Sidebar Toggle & Plus Icon */}
+                <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm">
+                        <SidebarTrigger className="ml-[1.1]" />
+                    </div>
+
+                    {!open && (
+                        <div className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm">
+                            <PlusIcon />
+                        </div>
+                    )}
+                    <div className="font-[family-name:var(--font-geist-sans)]">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="outline" className="w-[140px] flex items-center justify-between px-3 font-[family-name:var(--font-geist-sans)]">
+                                    Appearance
+                                    <ChevronDownIcon className="w-4 h-4 ml-1" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                                align="start"
+                                className="font-[family-name:var(--font-geist-sans)]"
                             >
-                                Status Bar
-                            </DropdownMenuCheckboxItem>
-                            <DropdownMenuCheckboxItem
-                                checked={showActivityBar}
-                                onCheckedChange={setShowActivityBar}
-                                disabled
-                            >
-                                Activity Bar
-                            </DropdownMenuCheckboxItem>
-                            <DropdownMenuCheckboxItem
-                                checked={showPanel}
-                                onCheckedChange={setShowPanel}
-                            >
-                                Panel
-                            </DropdownMenuCheckboxItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                                <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuCheckboxItem
+                                    checked={showStatusBar}
+                                    onCheckedChange={setShowStatusBar}
+                                >
+                                    Status Bar
+                                </DropdownMenuCheckboxItem>
+                                <DropdownMenuCheckboxItem
+                                    checked={showActivityBar}
+                                    onCheckedChange={setShowActivityBar}
+                                    disabled
+                                >
+                                    Activity Bar
+                                </DropdownMenuCheckboxItem>
+                                <DropdownMenuCheckboxItem
+                                    checked={showPanel}
+                                    onCheckedChange={setShowPanel}
+                                >
+                                    Panel
+                                </DropdownMenuCheckboxItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
 
                 </div>
+
+                {/* Right Side: Appearance Dropdown */}
+                <div className="flex items-center gap-2">
+                    {/* Share Button */}
+                    <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        <Share2Icon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                        <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Share</span>
+                    </button>
+
+
+                    {/* Theme Toggle Button */}
+                    <button
+                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                        className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    >
+                        {theme === "dark" ? (
+                            <SunIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                        ) : (
+                            <MoonIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                        )}
+                    </button>
+                </div>
+
             </header>
         </>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
