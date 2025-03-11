@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { SidebarTrigger, useSidebar, SidebarProvider, Sidebar } from "./ui/sidebar";
-import { PlusIcon, ChevronDownIcon, Share2Icon, SunIcon, MoonIcon } from "lucide-react";
+import { PlusIcon, ChevronDownIcon, Share2Icon, SunIcon, MoonIcon, Edit, StarIcon } from "lucide-react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { useTheme } from "next-themes"; // For theme toggling
 
@@ -38,7 +38,7 @@ const Header = () => {
 
                     {!open && (
                         <div className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm">
-                            <PlusIcon />
+                            <Edit className="w-5 h-5" />
                         </div>
                     )}
                     <div className="font-[family-name:var(--font-geist-sans)]">
@@ -53,8 +53,6 @@ const Header = () => {
                                 align="start"
                                 className="font-[family-name:var(--font-geist-sans)]"
                             >
-                                <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
                                 <DropdownMenuCheckboxItem
                                     checked={showStatusBar}
                                     onCheckedChange={setShowStatusBar}
@@ -82,13 +80,17 @@ const Header = () => {
 
                 {/* Right Side: Appearance Dropdown */}
                 <div className="flex items-center gap-2">
+
                     {/* Share Button */}
-                    <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <button className="flex items-center gap-2 px-2 py-1 sm:px-4 sm:py-2 border border-gray-300 dark:border-gray-600 sm:rounded-full rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
                         <Share2Icon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                        <span className="text-gray-600 dark:text-gray-300 text-sm font-medium">Share</span>
+                        <span className="text-gray-600 dark:text-gray-300 text-sm font-medium hidden sm:inline">Share</span>
                     </button>
-
-
+                    <button
+                        className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                    >
+                        <StarIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+                    </button>
                     {/* Theme Toggle Button */}
                     <button
                         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
