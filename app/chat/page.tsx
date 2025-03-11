@@ -45,7 +45,7 @@ const ChatInterface: React.FC = () => {
     const sendMessage = () => {
         if (message.trim() === "") return;
 
-        const newMessages = [...messages.map(msg => ({ ...msg, isLast: false })), { text: message, sender: "user" }];
+        const newMessages = [...messages.map(msg => ({ ...msg, isLast: false })), { text: message, sender: "user" as "user" | "bot" }];
         setMessages(newMessages);
         setMessage("");
 
