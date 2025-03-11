@@ -13,9 +13,16 @@ import {
     SidebarMenuItem,
     SidebarRail,
 } from "@/components/ui/sidebar"
+import { NavUser } from "./nav-user"
 
 // This is sample data.
 const data = {
+    user: {
+        name: "Zaryab",
+        email: "zk126128@gmail.com",
+        avatar: "https://img.icons8.com/color/48/gender-neutral-user.png",
+    },
+
     navMain: [
         {
             title: "Getting Started",
@@ -169,9 +176,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavMain items={data.navMain} />
             </SidebarContent>
             <SidebarFooter>
-                <div className="p-1">
-                    <SidebarOptInForm />
-                </div>
+                <NavUser user={data.user} />
             </SidebarFooter>
             <SidebarRail />
         </Sidebar>
