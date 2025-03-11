@@ -74,15 +74,15 @@ const ChatInterface: React.FC = () => {
     };
 
     return (
-        <div className="font-[family-name:var(--font-geist-sans)] flex flex-col items-center min-h-screen w-full max-w-4xl mx-auto sm:w-[90%] md:w-[800px] relative pl-3 pr-3">
-            <header className="flex items-center justify-between w-full max-w-4xl p-4 pl-0 pr-0">
+        <div className="font-[family-name:var(--font-geist-sans)] flex flex-col h-screen w-full max-w-4xl mx-auto sm:w-[90%] md:w-[700px]">
+            <header className="flex items-center justify-between w-full max-w-4xl p-4">
                 <h1 className="text-xl font-semibold">ChatGPT 4.0</h1>
             </header>
 
-            <div className="flex-1 w-full max-w-4xl min-h-[450px] max-h-[60vh] p-4 pl-0 pr-2 rounded-lg overflow-y-auto relative z-0 space-y-3">
+            {/* Chat Area */}
+            <div className="flex-1 w-full max-w-4xl p-4 overflow-y-auto space-y-3">
                 {messages.map((msg, index) => (
                     <div key={index} className="flex flex-col group">
-                        {/* Message or Loading Indicator */}
                         <div
                             className={`break-words w-fit max-w-[75%] lg:max-w-[65%] p-3 text-[16px] ${msg.sender === "user"
                                 ? "bg-blue-500 text-white self-end rounded-lg ml-auto"
@@ -102,10 +102,7 @@ const ChatInterface: React.FC = () => {
 
                         {/* Bot Actions (Copy, Like, Dislike) */}
                         {msg.sender === "bot" && !msg.isLoading && (
-                            <div
-                                className={`flex pl-[5px] pt-[5px] space-x-3  text-gray-500 transition-opacity duration-300 ${msg.isLast ? "opacity-100 mt-2" : "opacity-0 group-hover:opacity-100 mt-2"
-                                    }`}
-                            >
+                            <div className="flex pl-[5px] pt-[5px] space-x-3 text-gray-500 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
                                 <Copy className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                 <ThumbsUp className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                 <ThumbsDown className="w-4 h-4 cursor-pointer hover:text-gray-700" />
@@ -116,17 +113,17 @@ const ChatInterface: React.FC = () => {
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* Input Section */}
-            <footer className="w-full flex justify-center p-5 pl-0 pr-0 relative">
+            {/* Input Section - Footer at Bottom */}
+            <footer className="w-full bg-white dark:bg-gray-800 p-3 flex-shrink-0">
                 <div
-                    className={`flex flex-col max-w-4xl w-full p-2 rounded-lg transition-all duration-200 ease-out 
+                    className={`flex flex-col max-w-4xl w-full mx-auto p-2 rounded-lg transition-all duration-200 ease-out 
             ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"} 
             dark:bg-gray-800 dark:border-gray-600 dark:text-white`}
                 >
                     <textarea
                         ref={textareaRef}
                         placeholder="Send a message..."
-                        className="max-w-2xl w-full bg-transparent border-none focus:ring-0 outline-none resize-none p-1 pr-1 
+                        className="w-full bg-transparent border-none focus:ring-0 outline-none resize-none p-1 pr-1 
                 text-gray-700 min-h-[50px] max-h-[40vh] overflow-y-auto 
                 dark:text-white"
                         rows={1}
