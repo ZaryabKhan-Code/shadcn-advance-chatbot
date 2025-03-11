@@ -74,7 +74,7 @@ const ChatInterface: React.FC = () => {
                     </div>
                 </header>
 
-                <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4">
+                <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll">
                     {messages.map((msg, index) => (
                         <div key={index} className="w-full mx-auto max-w-3xl px-3 group/message">
                             <div className={`break-words w-fit max-w-[80%] md:max-w-[70%] lg:max-w-[65%] p-2 md:p-3 text-sm md:text-[16px] ${msg.sender === "user" ? "bg-blue-500 text-white self-end rounded-lg ml-auto" : "text-gray-800 self-start bg-gray-100 rounded-lg mt-2 md:mt-3"}`}>
