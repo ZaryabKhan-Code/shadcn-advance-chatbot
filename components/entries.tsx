@@ -50,7 +50,7 @@ const EntriesInterface: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-7 max-w-5xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-6 max-w-5xl mx-auto w-full">
                     {entries.map((entry) => (
                         <Card key={entry.id} className="relative border border-gray-200 dark:border-gray-700 rounded-lg shadow-md hover:shadow-lg transition">
                             <CardHeader>
@@ -58,6 +58,7 @@ const EntriesInterface: React.FC = () => {
                                     <CardTitle className="text-md font-semibold truncate max-w-[180px] sm:max-w-[220px]">
                                         {entry.title}
                                     </CardTitle>
+
                                     <div className="flex items-center gap-3">
                                         <button
                                             onClick={() => toggleFavorite(entry.id)}
@@ -73,6 +74,7 @@ const EntriesInterface: React.FC = () => {
                                 <p className="text-sm text-gray-500">{entry.date}</p>
                             </CardHeader>
                             <CardFooter className="flex justify-between gap-1">
+                                {/* Action Buttons with Text + Icons */}
                                 <Button variant="ghost" size="sm" className="border flex items-center gap-1 text-red-500 hover:text-red-600">
                                     <Trash2 className="w-4 h-4" />
                                     Delete
