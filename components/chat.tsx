@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronDownIcon, ArrowUpIcon, MicIcon, AudioWaveform, ThumbsUp, ThumbsDown, Copy, AudioLinesIcon } from "lucide-react";
+import { ChevronDownIcon, ArrowUpIcon, MicIcon, AudioWaveform, ThumbsUp, ThumbsDown, Copy, AudioLinesIcon, FileText, EarthIcon } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { SidebarTrigger } from "./ui/sidebar";
@@ -68,7 +68,6 @@ const ChatInterface: React.FC = () => {
         <div className="relative flex min-h-svh flex-1 flex-col bg-background peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow font-[family-name:var(--font-geist-sans)]">
             <div className="flex flex-col min-w-0 h-dvh bg-background">
                 <header className="flex sticky top-0 bg-background py-1.5 items-center px-2 md:px-2 gap-2">
-                    {/* Square container with border around SidebarTrigger */}
                     <div className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm">
                         <SidebarTrigger className="ml-[1.4]" />
                     </div>
@@ -112,9 +111,18 @@ const ChatInterface: React.FC = () => {
                             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), sendMessage())}
                         />
                         <>
-                            <div className="absolute bottom-0 p-3 w-fit flex flex-row justify-start">
+                            <div className="absolute bottom-0 p-3 pt-5 w-fit flex flex-row items-center gap-3">
                                 <MicIcon className="w-5 h-5 md:w-5 md:h-5 text-gray-600 cursor-pointer hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
+                                <button className="flex items-center gap-2 px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                                    <EarthIcon className="w-5 h-5" />
+                                    <span className="text-sm font-small">Search</span>
+                                </button>
+                                <button className="flex items-center gap-2 px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                                    <FileText className="w-5 h-5" />
+                                    <span className="text-sm font-small">Generate Report</span>
+                                </button>
                             </div>
+
                             <div
                                 className="absolute bottom-0 right-0 p-3 w-fit flex flex-row justify-end"
                                 onClick={sendMessage}
