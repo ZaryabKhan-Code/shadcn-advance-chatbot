@@ -117,15 +117,18 @@ const ChatInterface: React.FC = () => {
             </div>
 
             {/* Input Section */}
-            <footer className="w-full flex justify-center p-5 pl-0 pr-0 relative ">
+            <footer className="w-full flex justify-center p-5 pl-0 pr-0 relative">
                 <div
-                    className={`flex flex-col max-w-4xl w-full  p-2 rounded-lg transition-all duration-200 ease-out ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"
-                        }`}
+                    className={`flex flex-col max-w-4xl w-full p-2 rounded-lg transition-all duration-200 ease-out 
+            ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"} 
+            dark:bg-gray-800 dark:border-gray-600 dark:text-white`}
                 >
                     <textarea
                         ref={textareaRef}
                         placeholder="Send a message..."
-                        className="max-w-2xl w-full bg-transparent border-none focus:ring-0 outline-none resize-none p-1 pr-1 text-gray-700 min-h-[50px] max-h-[40vh] overflow-y-auto"
+                        className="max-w-2xl w-full bg-transparent border-none focus:ring-0 outline-none resize-none p-1 pr-1 
+                text-gray-700 min-h-[50px] max-h-[40vh] overflow-y-auto 
+                dark:text-white"
                         rows={1}
                         value={message}
                         onChange={handleInputChange}
@@ -133,16 +136,17 @@ const ChatInterface: React.FC = () => {
                     />
                     <div className="flex justify-between p-2 pt-5">
                         <div className="flex items-center justify-center">
-                            <MicIcon className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-800" />
+                            <MicIcon className="w-6 h-6 text-gray-600 cursor-pointer hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
                         </div>
                         <div
-                            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 cursor-pointer hover:bg-gray-300 transition-all"
+                            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 cursor-pointer hover:bg-gray-300 
+                    dark:bg-gray-700 dark:hover:bg-gray-600 transition-all"
                             onClick={sendMessage}
                         >
                             {message.trim() === "" ? (
-                                <AudioWaveform className="w-6 h-6 text-gray-600 hover:text-gray-800" />
+                                <AudioWaveform className="w-6 h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
                             ) : (
-                                <ArrowUpIcon className="w-6 h-6 text-gray-600 hover:text-gray-800" />
+                                <ArrowUpIcon className="w-6 h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
                             )}
                         </div>
                     </div>
