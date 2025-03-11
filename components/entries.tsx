@@ -17,16 +17,16 @@ const EntriesInterface: React.FC = () => {
                 <div className="flex flex-1 items-center justify-center px-4 mt-5">
                     <div className="w-full max-w-lg text-center">
 
-                        {/* Lucide Icon + Heading */}
+                        {/* Responsive Icon + Heading */}
                         <div className="flex flex-col items-center">
-                            <NotebookText className="w-12 h-12 text-blue-500 dark:text-blue-400 mb-2" />
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
+                            <NotebookText className="w-10 h-10 sm:w-12 sm:h-12 text-gray-500 dark:text-gray-400 mb-2" />
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
                                 Explore Your Entries
                             </h2>
                         </div>
 
-                        {/* Description */}
-                        <p className="text-gray-600 dark:text-gray-400 text-lg mt-2">
+                        {/* Description (Responsive Font Size) */}
+                        <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-400 mt-2">
                             Manage your past chats, notes, and insights in one place.
                         </p>
 
@@ -41,7 +41,7 @@ const EntriesInterface: React.FC = () => {
                                 placeholder="Search your entries..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900"
+                                className="w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 text-sm sm:text-base md:text-lg"
                             />
                         </div>
                     </div>
