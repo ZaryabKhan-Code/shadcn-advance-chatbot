@@ -1,15 +1,19 @@
-
-import ChatInterface from "@/components/chat"
+import { ReactNode } from "react"
 import { AppSidebar } from "@/components/app-sidebar"
 import {
     SidebarProvider,
 } from "@/components/ui/sidebar"
 
-export default function Page() {
+
+interface LayoutProps {
+    children: ReactNode
+}
+
+export default function Layout({ children }: LayoutProps) {
     return (
         <SidebarProvider className="font-[family-name:var(--font-geist-sans)]">
             <AppSidebar />
-            <ChatInterface />
+            {children}
         </SidebarProvider>
     )
 }

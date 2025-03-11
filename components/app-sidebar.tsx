@@ -17,6 +17,7 @@ import { NavUser } from "./nav-user";
 import { NavFavorites } from "./nav-favorites";
 import Image from "next/image";
 import { SearchDialog } from "./searchdialog";
+import Link from "next/link";
 
 // Sample data for chatbot navigation
 const data = {
@@ -26,8 +27,8 @@ const data = {
         avatar: "https://img.icons8.com/color/48/gender-neutral-user.png",
     },
     navMain: [
-        { title: "New Chat", url: "#", icon: <PlusCircle className="w-5 h-5" /> },
-        { title: "Entries", url: "#", icon: <History className="w-5 h-5" /> },
+        { title: "New Chat", url: "/u/chat", icon: <PlusCircle className="w-5 h-5" /> },
+        { title: "Entries", url: "/u/entries", icon: <History className="w-5 h-5" /> },
         { title: "Help", url: "#", icon: <HelpCircle className="w-5 h-5" /> },
     ],
     favorites: [
@@ -78,13 +79,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         {data.navMain.map((item, index) => (
                             <SidebarMenuItem key={index}>
                                 <SidebarMenuButton asChild>
-                                    <a
+                                    <Link
                                         href={item.url}
                                         className="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                                     >
                                         {item.icon}
                                         <span className="text-sm font-medium">{item.title}</span>
-                                    </a>
+                                    </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         ))}
