@@ -1,20 +1,19 @@
 "use client";
 
 import * as React from "react";
-import { SidebarTrigger, useSidebar, SidebarProvider, Sidebar } from "./ui/sidebar";
-import { PlusIcon, ChevronDownIcon, Share2Icon, SunIcon, MoonIcon, Edit, StarIcon } from "lucide-react";
+import { SidebarTrigger, useSidebar, } from "./ui/sidebar";
+import { ChevronDownIcon, Share2Icon, SunIcon, MoonIcon, Edit, StarIcon } from "lucide-react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { useTheme } from "next-themes"; // For theme toggling
-
-import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import { Button } from "@/components/ui/button"
+import { ShareDialog } from "./sharedialog";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
@@ -77,21 +76,13 @@ const Header = () => {
                     </div>
 
                 </div>
-
-                {/* Right Side: Appearance Dropdown */}
                 <div className="flex items-center gap-2">
-
-                    {/* Share Button */}
-                    <button className="flex items-center gap-2 px-2 py-1 sm:px-4 sm:py-2 border border-gray-300 dark:border-gray-600 sm:rounded-full rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                        <Share2Icon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                        <span className="text-gray-600 dark:text-gray-300 text-sm font-medium hidden sm:inline">Share</span>
-                    </button>
+                    <ShareDialog />
                     <button
                         className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                     >
                         <StarIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
                     </button>
-                    {/* Theme Toggle Button */}
                     <button
                         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                         className="w-8 h-8 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded-sm hover:bg-gray-200 dark:hover:bg-gray-700 transition"
