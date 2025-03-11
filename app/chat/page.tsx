@@ -1,5 +1,5 @@
 'use client'
-import { ChevronDownIcon, ArrowUpIcon, MicIcon, AudioWaveform, ThumbsUp, ThumbsDown, Copy } from "lucide-react";
+import { ChevronDownIcon, ArrowUpIcon, MicIcon, AudioWaveform, ThumbsUp, ThumbsDown, Copy, AudioLines, AudioLinesIcon } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const ChatInterface: React.FC = () => {
@@ -74,15 +74,16 @@ const ChatInterface: React.FC = () => {
     };
 
     return (
-        <div className="font-[family-name:var(--font-geist-sans)] flex flex-col h-screen w-full max-w-4xl mx-auto sm:w-[90%] md:w-[700px]">
+        <div className="flex flex-col min-h-screen max-h-screen w-full max-w-4xl mx-auto sm:w-[90%] md:w-[700px] font-[family-name:var(--font-geist-sans)]">
             <header className="flex items-center justify-between w-full max-w-4xl p-4">
                 <h1 className="text-xl font-semibold">ChatGPT 4.0</h1>
             </header>
 
-            {/* Chat Area */}
-            <div className="flex-1 w-full max-w-4xl p-4 overflow-y-auto space-y-3">
+            {/* Chat Area - Takes up available space but does not overflow */}
+            <div className="flex-1 w-full max-w-4xl p-4 space-y-3 overflow-y-auto">
                 {messages.map((msg, index) => (
                     <div key={index} className="flex flex-col group">
+                        {/* Message Container */}
                         <div
                             className={`break-words w-fit max-w-[75%] lg:max-w-[65%] p-3 text-[16px] ${msg.sender === "user"
                                 ? "bg-blue-500 text-white self-end rounded-lg ml-auto"
@@ -102,7 +103,10 @@ const ChatInterface: React.FC = () => {
 
                         {/* Bot Actions (Copy, Like, Dislike) */}
                         {msg.sender === "bot" && !msg.isLoading && (
-                            <div className="flex pl-[5px] pt-[5px] space-x-3 text-gray-500 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                            <div
+                                className={`flex pl-[5px] pt-[5px] space-x-3 text-gray-500 transition-opacity duration-300 
+                                ${msg.isLast ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}
+                            >
                                 <Copy className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                 <ThumbsUp className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                 <ThumbsDown className="w-4 h-4 cursor-pointer hover:text-gray-700" />
@@ -114,7 +118,7 @@ const ChatInterface: React.FC = () => {
             </div>
 
             {/* Input Section - Footer at Bottom */}
-            <footer className="w-full bg-white dark:bg-gray-800 p-3 flex-shrink-0">
+            <footer className="w-full bg-white dark:bg-gray-800 p-3">
                 <div
                     className={`flex flex-col max-w-4xl w-full mx-auto p-2 rounded-lg transition-all duration-200 ease-out 
             ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"} 
@@ -141,7 +145,7 @@ const ChatInterface: React.FC = () => {
                             onClick={sendMessage}
                         >
                             {message.trim() === "" ? (
-                                <AudioWaveform className="w-6 h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
+                                <AudioLinesIcon className="w-6 h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
                             ) : (
                                 <ArrowUpIcon className="w-6 h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
                             )}
