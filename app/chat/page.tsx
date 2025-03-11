@@ -64,56 +64,58 @@ const ChatInterface: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen w-full max-w-4xl mx-auto sm:w-[90%] md:w-[700px] font-[family-name:var(--font-geist-sans)]">
-            <header className="flex items-center justify-between w-full max-w-4xl p-2 md:p-4">
-                <h1 className="text-lg md:text-xl font-semibold">ChatGPT 4.0</h1>
-            </header>
+        <div className="relative flex min-h-svh flex-1 flex-col bg-background peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow">
+            <div className="flex flex-col min-w-0 h-dvh bg-background">
+                <header className="flex sticky top-0 bg-background py-1.5 items-center px-2 md:px-2 gap-2">
+                    <h1 className="text-lg md:text-xl font-semibold">ChatGPT 4.0</h1>
+                </header>
 
-            <ScrollArea className="flex-1 w-full max-w-4xl px-2 md:px-4 h-72 space-y-2 md:space-y-3">
-                {messages.map((msg, index) => (
-                    <div key={index} className="flex flex-col group">
-                        <div className={`break-words w-fit max-w-[80%] md:max-w-[70%] lg:max-w-[65%] p-2 md:p-3 text-sm md:text-[16px] ${msg.sender === "user" ? "bg-blue-500 text-white self-end rounded-lg ml-auto" : "text-gray-800 self-start bg-gray-100 rounded-lg mt-2 md:mt-3"}`}>
-                            {msg.isLoading ? (
-                                <div className="flex items-center space-x-1 md:space-x-2">
-                                    <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce"></div>
-                                    <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce delay-200"></div>
-                                    <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce delay-400"></div>
+                <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4">
+                    {messages.map((msg, index) => (
+                        <div key={index} className="w-full mx-auto max-w-3xl px-4 group/message">
+                            <div className={`break-words w-fit max-w-[80%] md:max-w-[70%] lg:max-w-[65%] p-2 md:p-3 text-sm md:text-[16px] ${msg.sender === "user" ? "bg-blue-500 text-white self-end rounded-lg ml-auto" : "text-gray-800 self-start bg-gray-100 rounded-lg mt-2 md:mt-3"}`}>
+                                {msg.isLoading ? (
+                                    <div className="flex items-center space-x-1 md:space-x-2">
+                                        <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce"></div>
+                                        <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce delay-200"></div>
+                                        <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce delay-400"></div>
+                                    </div>
+                                ) : (
+                                    msg.text
+                                )}
+                            </div>
+                            {msg.sender === "bot" && !msg.isLoading && (
+                                <div className={`flex pl-[5px] pt-[2px] space-x-2 text-gray-500 transition-opacity duration-300 ${msg.isLast ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+                                    <Copy className="w-4 h-4 cursor-pointer hover:text-gray-700" />
+                                    <ThumbsUp className="w-4 h-4 cursor-pointer hover:text-gray-700" />
+                                    <ThumbsDown className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                 </div>
-                            ) : (
-                                msg.text
                             )}
                         </div>
-                        {msg.sender === "bot" && !msg.isLoading && (
-                            <div className={`flex pl-[5px] pt-[2px] space-x-2 text-gray-500 transition-opacity duration-300 ${msg.isLast ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
-                                <Copy className="w-4 h-4 cursor-pointer hover:text-gray-700" />
-                                <ThumbsUp className="w-4 h-4 cursor-pointer hover:text-gray-700" />
-                                <ThumbsDown className="w-4 h-4 cursor-pointer hover:text-gray-700" />
-                            </div>
-                        )}
-                    </div>
-                ))}
-                <div ref={messagesEndRef} />
-            </ScrollArea>
+                    ))}
+                    <div ref={messagesEndRef} />
+                </div>
 
-            <footer className="w-full bg-white dark:bg-gray-800 p-2 md:p-3">
-                <div className={`flex flex-col max-w-4xl w-full mx-auto p-1 md:p-2 rounded-lg transition-all duration-200 ease-out ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"} dark:bg-gray-800 dark:border-gray-600 dark:text-white`}>
-                    <textarea
-                        ref={textareaRef}
-                        placeholder="Send a message..."
-                        className="w-full bg-transparent border-none focus:ring-0 outline-none resize-none p-1 pr-1 text-gray-700 min-h-[40px] max-h-[30vh] overflow-y-auto text-sm md:text-base dark:text-white"
-                        rows={1}
-                        value={message}
-                        onChange={handleInputChange}
-                        onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), sendMessage())}
-                    />
-                    <div className="flex justify-between p-2 pt-3">
-                        <MicIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 cursor-pointer hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
-                        <div className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-200 cursor-pointer hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all" onClick={sendMessage}>
-                            {message.trim() === "" ? <AudioLinesIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" /> : <ArrowUpIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />}
+                <footer className="w-full bg-white dark:bg-gray-800 p-2 md:p-3">
+                    <div className={`flex flex-col max-w-4xl w-full mx-auto p-1 md:p-2 rounded-lg transition-all duration-200 ease-out ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"} dark:bg-gray-800 dark:border-gray-600 dark:text-white`}>
+                        <textarea
+                            ref={textareaRef}
+                            placeholder="Send a message..."
+                            className="w-full bg-transparent border-none focus:ring-0 outline-none resize-none p-1 pr-1 text-gray-700 min-h-[40px] max-h-[30vh] overflow-y-auto text-sm md:text-base dark:text-white"
+                            rows={1}
+                            value={message}
+                            onChange={handleInputChange}
+                            onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), sendMessage())}
+                        />
+                        <div className="flex justify-between p-2 pt-3">
+                            <MicIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 cursor-pointer hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />
+                            <div className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-200 cursor-pointer hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all" onClick={sendMessage}>
+                                {message.trim() === "" ? <AudioLinesIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" /> : <ArrowUpIcon className="w-5 h-5 md:w-6 md:h-6 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white" />}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </footer>
+                </footer>
+            </div>
         </div>
     );
 };
