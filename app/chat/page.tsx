@@ -64,7 +64,7 @@ const ChatInterface: React.FC = () => {
     };
 
     return (
-        <div className="relative flex min-h-svh flex-1 flex-col bg-background peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow">
+        <div className="relative flex min-h-svh flex-1 flex-col bg-background peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow font-[family-name:var(--font-geist-sans)]">
             <div className="flex flex-col min-w-0 h-dvh bg-background">
                 <header className="flex sticky top-0 bg-background py-1.5 items-center px-2 md:px-2 gap-2">
                     <h1 className="text-lg md:text-xl font-semibold">ChatGPT 4.0</h1>
@@ -85,7 +85,7 @@ const ChatInterface: React.FC = () => {
                                 )}
                             </div>
                             {msg.sender === "bot" && !msg.isLoading && (
-                                <div className={`flex pl-[5px] pt-[2px] space-x-2 text-gray-500 transition-opacity duration-300 ${msg.isLast ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+                                <div className={`flex mt-2 pl-[6px] pt-[2px] space-x-2 text-gray-500 transition-opacity duration-300 ${msg.isLast ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
                                     <Copy className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                     <ThumbsUp className="w-4 h-4 cursor-pointer hover:text-gray-700" />
                                     <ThumbsDown className="w-4 h-4 cursor-pointer hover:text-gray-700" />
@@ -96,8 +96,8 @@ const ChatInterface: React.FC = () => {
                     <div ref={messagesEndRef} />
                 </div>
 
-                <footer className="w-full bg-white dark:bg-gray-800 p-2 md:p-3">
-                    <div className={`flex flex-col max-w-4xl w-full mx-auto p-1 md:p-2 rounded-lg transition-all duration-200 ease-out ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"} dark:bg-gray-800 dark:border-gray-600 dark:text-white`}>
+                <footer className="flex mx-auto px-4 bg-background pb-4 md:pb-6 gap-2 w-full md:max-w-3xl">
+                    <div className={`flex relative flex-col max-w-4xl w-full mx-auto p-1 md:p-2 rounded-lg transition-all duration-200 ease-out ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"} dark:bg-gray-800 dark:border-gray-600 dark:text-white`}>
                         <textarea
                             ref={textareaRef}
                             placeholder="Send a message..."
