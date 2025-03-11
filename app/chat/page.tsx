@@ -72,7 +72,7 @@ const ChatInterface: React.FC = () => {
 
                 <div className="flex flex-col min-w-0 gap-6 flex-1 overflow-y-scroll pt-4">
                     {messages.map((msg, index) => (
-                        <div key={index} className="w-full mx-auto max-w-3xl px-4 group/message">
+                        <div key={index} className="w-full mx-auto max-w-3xl px-3 group/message">
                             <div className={`break-words w-fit max-w-[80%] md:max-w-[70%] lg:max-w-[65%] p-2 md:p-3 text-sm md:text-[16px] ${msg.sender === "user" ? "bg-blue-500 text-white self-end rounded-lg ml-auto" : "text-gray-800 self-start bg-gray-100 rounded-lg mt-2 md:mt-3"}`}>
                                 {msg.isLoading ? (
                                     <div className="flex items-center space-x-1 md:space-x-2">
@@ -115,7 +115,7 @@ const ChatInterface: React.FC = () => {
                                 className="absolute bottom-0 right-0 p-3 w-fit flex flex-row justify-end"
                                 onClick={sendMessage}
                             >
-                                <div className="w-5 h-5 md:w-7 md:h-7 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                                <div className="w-7 h-7 md:w-7 md:h-7 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-600 transition">
                                     {message.trim() === "" ? (
                                         <AudioLinesIcon className="w-5 h-5 md:w-5 md:h-5 text-gray-600 dark:text-gray-300" />
                                     ) : (
