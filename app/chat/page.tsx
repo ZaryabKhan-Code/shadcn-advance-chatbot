@@ -13,6 +13,19 @@ const ChatInterface: React.FC = () => {
         setIsFocused(message.length > 0);
     }, [message]);
 
+    useEffect(() => {
+        // Show an introduction message from the bot when the chat loads
+        setTimeout(() => {
+            setMessages([
+                {
+                    text: "Hello! I'm your AI assistant. How can I help you today?",
+                    sender: "bot",
+                    isLast: true,
+                },
+            ]);
+        }, 500);
+    }, []);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setMessage(e.target.value);
 
@@ -32,7 +45,7 @@ const ChatInterface: React.FC = () => {
     const sendMessage = () => {
         if (message.trim() === "") return;
 
-        const newMessages = [...messages.map(msg => ({ ...msg, isLast: false })), { text: message, sender: "user" as "user" | "bot" }];
+        const newMessages = [...messages.map(msg => ({ ...msg, isLast: false })), { text: message, sender: "user" }];
         setMessages(newMessages);
         setMessage("");
 
@@ -64,11 +77,9 @@ const ChatInterface: React.FC = () => {
         <div className="font-[family-name:var(--font-geist-sans)] flex flex-col items-center min-h-screen w-full max-w-4xl mx-auto sm:w-[90%] md:w-[800px] relative pl-3 pr-3">
             <header className="flex items-center justify-between w-full max-w-4xl p-4 pl-0 pr-0">
                 <h1 className="text-xl font-semibold">ChatGPT 4.0</h1>
-                <ChevronDownIcon className="w-5 h-5 text-muted-foreground" />
             </header>
 
             <div className="flex-1 w-full max-w-4xl min-h-[450px] max-h-[60vh] p-4 pl-0 pr-2 rounded-lg overflow-y-auto relative z-0 space-y-3">
-                {messages.length === 0 && <div className="text-center text-gray-500">Start the conversation...</div>}
                 {messages.map((msg, index) => (
                     <div key={index} className="flex flex-col group">
                         {/* Message or Loading Indicator */}
@@ -106,9 +117,9 @@ const ChatInterface: React.FC = () => {
             </div>
 
             {/* Input Section */}
-            <footer className="w-full flex  justify-center p-5 pl-0 pr-0 relative bg-white">
+            <footer className="w-full flex justify-center p-5 pl-0 pr-0 relative ">
                 <div
-                    className={`flex flex-col max-w-4xl w-full bg-gray-100 p-2 rounded-lg transition-all duration-200 ease-out ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"
+                    className={`flex flex-col max-w-4xl w-full  p-2 rounded-lg transition-all duration-200 ease-out ${isFocused ? "border-2 border-gray-400 shadow-md" : "border border-gray-200 shadow-none"
                         }`}
                 >
                     <textarea
