@@ -1,9 +1,7 @@
 'use client';
 
-import { ChevronDownIcon, ArrowUpIcon, MicIcon, AudioWaveform, ThumbsUp, ThumbsDown, Copy, AudioLinesIcon, FileText, EarthIcon, PlusIcon } from "lucide-react";
+import { ArrowUpIcon, MicIcon, ThumbsUp, ThumbsDown, Copy, AudioLinesIcon, FileText, EarthIcon } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { SidebarTrigger } from "./ui/sidebar";
 import Header from "./header";
 
 const ChatInterface: React.FC = () => {
@@ -69,7 +67,6 @@ const ChatInterface: React.FC = () => {
         <div className="relative flex min-h-svh flex-1 flex-col bg-background peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow font-[family-name:var(--font-geist-sans)]">
             <div className="flex flex-col min-w-0 h-dvh bg-background">
                 <Header />
-
                 <div className="flex flex-col min-w-0 gap-5 flex-1 overflow-y-scroll">
                     {messages.map((msg, index) => (
                         <div key={index} className="w-full mx-auto max-w-3xl px-5 group/message">
