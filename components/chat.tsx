@@ -82,15 +82,15 @@ const ChatInterface: React.FC = () => {
                 <Header />
                 <Tabs defaultValue={!showResume ? "chat" : "journal"} className="flex  flex-col min-w-0 gap-5 flex-1 overflow-y-scroll">
                     {showResume && (
-                        <div className="flex items-center justify-center mt-3">
+                        <div className="flex items-center justify-center mt-3 p-4">
                             <TabsList className="flex items-center justify-center w-[450px]">
                                 <TabsTrigger value="journal">Journal Entry</TabsTrigger>
                                 <TabsTrigger value="chat">Conversation</TabsTrigger>
                             </TabsList>
                         </div>
                     )}
-                    <TabsContent value="journal">
-                        <div className="max-w-3xl mx-auto p-5 bg-white dark:bg-gray-900 rounded-lg shadow-md">
+                    <TabsContent value="journal" className="p-4 pt-0">
+                        <div className="max-w-2xl mx-auto p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md">
                             <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                                 <NotebookPen className="w-5 h-5" /> Journal Entries
                             </h2>
