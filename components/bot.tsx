@@ -13,11 +13,12 @@ const Bot: React.FC = () => {
     const [journalEntries, setJournalEntries] = useState<string[]>(["Today was a productive day. I completed my tasks efficiently.", "Reflected on my goals and made a plan for the upcoming week.", "Today was a productive day. I completed my tasks efficiently.", "Reflected on my goals and made a plan for the upcoming week.", "Today was a productive day. I completed my tasks efficiently.", "Reflected on my goals and made a plan for the upcoming week."]);
 
     useEffect(() => {
-        console.log("hello world", window.location.hash)
-        if (window.location.hash === "#view") {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("view") === "complete") {
             setShowResume(true);
         }
     }, []);
+
 
     useEffect(() => {
         setTimeout(() => {

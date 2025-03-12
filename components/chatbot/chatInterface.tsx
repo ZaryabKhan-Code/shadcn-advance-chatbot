@@ -34,8 +34,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ showResume, journalEntrie
         <Tabs defaultValue={!showResume ? "chat" : "journal"} className="flex flex-col min-w-0 gap-5 flex-1 overflow-y-scroll">
             {showResume && (
                 <div
-                    className={`sticky top-0 z-50 transition-shadow duration-300 bg-background p-4 ${isScrolled ? "shadow-md" : "shadow-none"
-                        }`}
+                    className={`sticky top-0 z-20 transition-shadow duration-300 bg-background p-4 `}
                 >
                     <div className="flex items-center justify-center">
                         <TabsList className="flex items-center justify-center md:w-[450px]">
@@ -53,19 +52,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ showResume, journalEntrie
 
             )}
             <TabsContent value="journal" className="p-4 pt-0">
-                <div className="max-w-2xl mx-auto p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md">
-                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                        <NotebookPen className="w-5 h-5" /> Journal Entries
+                <div className="max-w-2xl mx-auto p-4 bg-white dark:bg-gray-900 rounded-lg  border shadow-md">
+                    <h2 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                        <NotebookPen className="w-5 h-5 md:w-6 md:h-6" />
+                        Journal Entries
                     </h2>
                     <div className="mt-4 space-y-4">
                         {journalEntries.length > 0 ? (
                             journalEntries.map((entry, index) => (
-                                <div key={index} className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow">
-                                    <p className="text-gray-800 dark:text-gray-300">{entry}</p>
+                                <div key={index} className="p-3 md:p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow">
+                                    <p className="text-sm md:text-base text-gray-800 dark:text-gray-300">
+                                        {entry}
+                                    </p>
                                 </div>
                             ))
                         ) : (
-                            <p className="text-gray-500 dark:text-gray-400">No journal entries available.</p>
+                            <p className="text-sm md:text-base text-gray-500 dark:text-gray-400">
+                                No journal entries available.
+                            </p>
                         )}
                     </div>
                 </div>

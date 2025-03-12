@@ -15,11 +15,10 @@ const ChatInput: React.FC<ChatInputProps> = ({ showResume, textareaRef, message,
             <div className={`relative w-full flex flex-col gap-4`}>
                 {showResume ?
                     <div className="flex justify-center py-4">
-                        <button className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
-                            <RefreshCcw className="w-5 h-5" />
+                        <button className="flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition text-sm md:text-base">
+                            <RefreshCcw className="w-4 h-4 md:w-5 md:h-5" />
                             Resume Conversation
                         </button>
-
                     </div>
                     : <>
                         <textarea
