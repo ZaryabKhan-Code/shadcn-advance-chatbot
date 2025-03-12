@@ -1,16 +1,6 @@
 'use client';
-
-import { ArrowUpIcon, MicIcon, ThumbsUp, ThumbsDown, Copy, AudioLinesIcon, FileText, NotebookPen, EarthIcon, RefreshCcw } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import Header from "./header";
-import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from "@/components/ui/tabs"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import ChatInput from "./chatbot/chatInput";
 import ChatInterface from "./chatbot/chatInterface";
 
@@ -20,7 +10,7 @@ const Bot: React.FC = () => {
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null!);
     const [showResume, setShowResume] = useState(false);
-    const [journalEntries, setJournalEntries] = useState<string[]>(["Today was a productive day. I completed my tasks efficiently.", "Reflected on my goals and made a plan for the upcoming week."]);
+    const [journalEntries, setJournalEntries] = useState<string[]>(["Today was a productive day. I completed my tasks efficiently.", "Reflected on my goals and made a plan for the upcoming week.", "Today was a productive day. I completed my tasks efficiently.", "Reflected on my goals and made a plan for the upcoming week.", "Today was a productive day. I completed my tasks efficiently.", "Reflected on my goals and made a plan for the upcoming week."]);
 
     useEffect(() => {
         console.log("hello world", window.location.hash)

@@ -5,6 +5,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
+import { useState, useEffect } from "react";
 
 interface ChatInterfaceProps {
     showResume: boolean;
@@ -14,21 +15,42 @@ interface ChatInterfaceProps {
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ showResume, journalEntries, messages, messagesEndRef }) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 10) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <Tabs defaultValue={!showResume ? "chat" : "journal"} className="flex flex-col min-w-0 gap-5 flex-1 overflow-y-scroll">
             {showResume && (
-                <div className="flex items-center justify-center mt-3 p-4">
-                    <TabsList className="flex items-center justify-center">
-                        <TabsTrigger value="journal" className="flex items-center gap-2">
-                            <NotebookPen className="w-5 h-5" />
-                            Journal Entry
-                        </TabsTrigger>
-                        <TabsTrigger value="chat" className="flex items-center gap-2">
-                            <MessageCircleDashed className="w-5 h-5" />
-                            Conversation
-                        </TabsTrigger>
-                    </TabsList>
+                <div
+                    className={`sticky top-0 z-50 transition-shadow duration-300 bg-background p-4 ${isScrolled ? "shadow-md" : "shadow-none"
+                        }`}
+                >
+                    <div className="flex items-center justify-center">
+                        <TabsList className="flex items-center justify-center md:w-[450px]">
+                            <TabsTrigger value="journal" className="flex items-center gap-2">
+                                <NotebookPen className="w-5 h-5" />
+                                Journal Entry
+                            </TabsTrigger>
+                            <TabsTrigger value="chat" className="flex items-center gap-2">
+                                <MessageCircleDashed className="w-5 h-5" />
+                                Conversation
+                            </TabsTrigger>
+                        </TabsList>
+                    </div>
                 </div>
+
             )}
             <TabsContent value="journal" className="p-4 pt-0">
                 <div className="max-w-2xl mx-auto p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md">
