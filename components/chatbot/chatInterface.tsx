@@ -1,4 +1,4 @@
-import { ThumbsUp, ThumbsDown, Copy, NotebookPen } from "lucide-react";
+import { ThumbsUp, ThumbsDown, Copy, NotebookPen, MessageCircleDashed } from "lucide-react";
 import {
     Tabs,
     TabsContent,
@@ -18,9 +18,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ showResume, journalEntrie
         <Tabs defaultValue={!showResume ? "chat" : "journal"} className="flex flex-col min-w-0 gap-5 flex-1 overflow-y-scroll">
             {showResume && (
                 <div className="flex items-center justify-center mt-3 p-4">
-                    <TabsList className="flex items-center justify-center ">
-                        <TabsTrigger value="journal">Journal Entry</TabsTrigger>
-                        <TabsTrigger value="chat">Conversation</TabsTrigger>
+                    <TabsList className="flex items-center justify-center">
+                        <TabsTrigger value="journal" className="flex items-center gap-2">
+                            <NotebookPen className="w-5 h-5" />
+                            Journal Entry
+                        </TabsTrigger>
+                        <TabsTrigger value="chat" className="flex items-center gap-2">
+                            <MessageCircleDashed className="w-5 h-5" />
+                            Conversation
+                        </TabsTrigger>
                     </TabsList>
                 </div>
             )}
