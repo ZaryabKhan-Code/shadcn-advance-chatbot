@@ -1,8 +1,8 @@
 
-import ChatInterface from "@/components/chat"
+import Bot from "@/components/bot"
 
 export default function Page() {
     return (
-        <ChatInterface />
+        <Bot />
     )
 }
