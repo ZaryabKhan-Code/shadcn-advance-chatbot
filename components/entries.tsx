@@ -50,7 +50,7 @@ const EntriesInterface: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-7 max-w-5xl mx-auto w-full">
+                <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-7 max-w-5xl mx-auto w-full">
                     {entries.map((entry) => (
                         <Card key={entry.id} className="relative border border-gray-200 dark:border-gray-700 rounded-lg shadow-md hover:shadow-lg transition">
                             <CardHeader>
